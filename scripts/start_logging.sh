@@ -15,6 +15,11 @@ pipe_pane_ansifilter() {
 	tmux pipe-pane "exec cat - | ansifilter >> $FILE"
 }
 
+pipe_pane_rotate() {
+        tmux pipe-pane "exec cat - | /home/martin/.tmux/plugins/tmux-logging/scripts/tmux_logger.sh $FILE"
+}
+
+
 pipe_pane_sed_osx() {
 	# Warning, very complex regex ahead.
 	# Some characters below might not be visible from github web view.
@@ -29,7 +34,8 @@ pipe_pane_sed() {
 
 start_pipe_pane() {
 	if ansifilter_installed; then
-		pipe_pane_ansifilter
+#		pipe_pane_ansifilter
+		pipe_pane_rotate
 	elif system_osx; then
 		# OSX uses sed '-E' flag and a slightly different regex
 		pipe_pane_sed_osx
