@@ -26,6 +26,15 @@ default_logging_path="$HOME"
 logging_path=$(tmux show-option -gqv "@logging-path")
 logging_path=${logging_path:-$default_logging_path}
 
+default_logging_max_size_kib="10240"
+logging_max_size=$(tmux show-option -gqv "@logging-max-size-kib")
+logging_max_size=${logging_max_size:-$default_logging_max_size_kib}
+logging_max_size=$((logging_max_size*1024))
+
+default_logging_max_size_check_interval="1000"
+logging_max_size_check_interval=$(tmux show-option -gqv "@logging-max-size-check-interval")
+logging_max_size_check_interval=${logging_max_size_check_interval:-$default_logging_max_size_check_interval}
+
 default_logging_filename="tmux-${filename_suffix}"
 logging_filename=$(tmux show-option -gqv "@logging-filename")
 logging_filename=${logging_filename:-$default_logging_filename}

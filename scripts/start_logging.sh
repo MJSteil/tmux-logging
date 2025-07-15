@@ -2,6 +2,7 @@
 
 # path to log file - global variable
 FILE="$1"
+DIR="$2"
 
 ansifilter_installed() {
 	type ansifilter >/dev/null 2>&1 || return 1
@@ -16,7 +17,7 @@ pipe_pane_ansifilter() {
 }
 
 pipe_pane_rotate() {
-        tmux pipe-pane "exec cat - | /home/martin/.tmux/plugins/tmux-logging/scripts/tmux_logger.sh $FILE"
+    tmux pipe-pane "exec cat - | $DIR/rotating_logger.sh $FILE $DIR"
 }
 
 
@@ -34,7 +35,7 @@ pipe_pane_sed() {
 
 start_pipe_pane() {
 	if ansifilter_installed; then
-#		pipe_pane_ansifilter
+#        pipe_pane_ansifilter
 		pipe_pane_rotate
 	elif system_osx; then
 		# OSX uses sed '-E' flag and a slightly different regex
