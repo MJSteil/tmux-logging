@@ -17,7 +17,7 @@ pipe_pane_ansifilter() {
 }
 
 pipe_pane_rotate() {
-    tmux pipe-pane "exec cat - | $DIR/rotating_logger.sh $FILE $DIR"
+    tmux pipe-pane "$DIR/rotating_logger.sh $FILE $DIR"
 }
 
 

@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 logfile="$1"
-
 source "$2/variables.sh"
 source "$2/shared.sh"
 max_size=${logging_max_size}
@@ -28,7 +25,7 @@ check_size() {
 }
 
 # Read stdin and append to log file
-while IFS= read -r line; do
+cat | while IFS= read -r line; do
     echo "$line" | ansifilter >> "$logfile"
     check_size
 done
